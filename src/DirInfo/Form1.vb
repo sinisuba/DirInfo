@@ -7,6 +7,10 @@ Public Class Form1
 
         LabelDriveInfo.Visible = True
 
+        If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
+            TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
+        End If
+
         Dim path As String = TextBoxPath.Text
 
         If Directory.Exists(path) Then
