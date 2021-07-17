@@ -10,7 +10,7 @@ Users are also given the possibility of creating new directories.
 
 ![exception-handling-UnauthorizedAccessException](../main/UnauthorizedAccessException.png?raw=true)
 
-`DirectoryNotFoundException` – if the user specifies an invalid path (e.g. `F:\TestDir\...`), the following exception will be thrown: `Could not find a part of the path 'F:\TestDir\...`.
+`DirectoryNotFoundException` – if the user specifies an invalid path (e.g. `F:\TestDir\...`) while attempting to create a new directory, the following exception will be thrown: `Could not find a part of the path 'F:\TestDir\...`.
 
 ![exception-handling-DirectoryNotFoundException](../main/DirectoryNotFoundException.png?raw=true)
 
