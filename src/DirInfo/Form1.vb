@@ -11,7 +11,9 @@ Public Class Form1
 
         If Directory.Exists(path) Then
             LabelDriveInfo.Text = "Pronadjen directory path '" & path & "'"
+
             ButtonNewDir.Enabled = True
+            ButtonDelDir.Enabled = True
 
             Dim folderi As String() = Directory.GetDirectories(path)
             Dim fajlovi As String() = Directory.GetFiles(path)
@@ -43,7 +45,9 @@ Public Class Form1
             Next
         Else
             LabelDriveInfo.Text = "Navedeni directory path " & "'" & path & "' " & "ne postoji!"
+
             ButtonNewDir.Enabled = False
+            ButtonDelDir.Enabled = False
         End If
     End Sub
 
@@ -54,7 +58,7 @@ Public Class Form1
             MessageBox.Show("Unesite pravilan naziv!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             If Directory.Exists(TextBoxPath.Text & dirName) Then
-                MessageBox.Show("Directory '" & dirName & "' vec postoji.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("Direktorijum '" & dirName & "' vec postoji.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 Try
                     Directory.CreateDirectory(TextBoxPath.Text & dirName)
@@ -63,6 +67,23 @@ Public Class Form1
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
             End If
+        End If
+    End Sub
+
+    Private Sub ButtonDelDir_Click(sender As Object, e As EventArgs) Handles ButtonDelDir.Click
+        MessageBox.Show("The specified directory will be permanently removed." & Environment.NewLine & "Use with caution.", "Del Dir", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+        Dim dirName As String = InputBox("Unesite naziv direktorijuma za brisanje", "Del Dir")
+
+        If String.IsNullOrWhiteSpace(dirName) Then
+            MessageBox.Show("Unesite pravilan naziv!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            Try
+                Directory.Delete(TextBoxPath.Text & dirName)
+                MessageBox.Show("Uspjesno obrisan direktorijum '" & dirName & "'", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
 End Class

@@ -31,12 +31,13 @@ Partial Class Form1
         Me.LabelFolderi = New System.Windows.Forms.Label()
         Me.ButtonIspis = New System.Windows.Forms.Button()
         Me.ListBoxFolderi = New System.Windows.Forms.ListBox()
+        Me.ButtonDelDir = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ButtonNewDir
         '
         Me.ButtonNewDir.Enabled = False
-        Me.ButtonNewDir.Location = New System.Drawing.Point(140, 441)
+        Me.ButtonNewDir.Location = New System.Drawing.Point(65, 438)
         Me.ButtonNewDir.Name = "ButtonNewDir"
         Me.ButtonNewDir.Size = New System.Drawing.Size(113, 37)
         Me.ButtonNewDir.TabIndex = 17
@@ -116,11 +117,22 @@ Partial Class Form1
         Me.ListBoxFolderi.Size = New System.Drawing.Size(157, 214)
         Me.ListBoxFolderi.TabIndex = 9
         '
+        'ButtonDelDir
+        '
+        Me.ButtonDelDir.Enabled = False
+        Me.ButtonDelDir.Location = New System.Drawing.Point(215, 438)
+        Me.ButtonDelDir.Name = "ButtonDelDir"
+        Me.ButtonDelDir.Size = New System.Drawing.Size(113, 37)
+        Me.ButtonDelDir.TabIndex = 18
+        Me.ButtonDelDir.Text = "Brisi direktorijum"
+        Me.ButtonDelDir.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(401, 504)
+        Me.Controls.Add(Me.ButtonDelDir)
         Me.Controls.Add(Me.ButtonNewDir)
         Me.Controls.Add(Me.TextBoxPath)
         Me.Controls.Add(Me.LabelDirPath)
@@ -146,4 +158,5 @@ Partial Class Form1
     Friend WithEvents LabelFolderi As Label
     Friend WithEvents ButtonIspis As Button
     Friend WithEvents ListBoxFolderi As ListBox
+    Friend WithEvents ButtonDelDir As Button
 End Class
