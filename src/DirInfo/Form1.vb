@@ -71,7 +71,7 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonDelDir_Click(sender As Object, e As EventArgs) Handles ButtonDelDir.Click
-        MessageBox.Show("The specified directory will be permanently removed." & Environment.NewLine & "Use with caution.", "Del Dir", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        MessageBox.Show("The specified directory will be permanently removed.", "Del Dir", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
         Dim dirName As String = InputBox("Unesite naziv direktorijuma za brisanje", "Del Dir")
 
