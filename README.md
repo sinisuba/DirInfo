@@ -1,4 +1,10 @@
 # DirInfo
+
+- [DirInfo - Overview](#overview)
+- [Exception handling examples](#exception-handling-examples)
+- [Application examples](#application-examples)
+
+# Overview
 This application allows its users to find out which folders and files are contained in a specified directory.
 
 Hidden folders/files contain the `[Hidden]` prefix.
