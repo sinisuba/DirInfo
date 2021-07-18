@@ -67,6 +67,7 @@ Public Class Form1
                 Try
                     Directory.CreateDirectory(TextBoxPath.Text & dirName)
                     MessageBox.Show("Uspjesno kreiran direktorijum '" & dirName & "'", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    ButtonIspis.PerformClick()
                 Catch ex As Exception
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
@@ -85,6 +86,7 @@ Public Class Form1
             Try
                 Directory.Delete(TextBoxPath.Text & dirName)
                 MessageBox.Show("Uspjesno obrisan direktorijum '" & dirName & "'", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                ButtonIspis.PerformClick()
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
