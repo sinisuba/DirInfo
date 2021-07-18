@@ -23,7 +23,7 @@ Users are also given the option of:
 
 ![exception-handling-DirectoryNotFoundException](../main/DirectoryNotFoundException.png?raw=true)
 
-Some other exceptions include `IOException`, `ArgumentException`, `ArgumentNullException`, `PathTooLongException`, `NotSupportedException`.
+Other exceptions include `IOException`, `ArgumentException`, `ArgumentNullException`, `PathTooLongException`, `NotSupportedException`.
 
 # Application examples
 
