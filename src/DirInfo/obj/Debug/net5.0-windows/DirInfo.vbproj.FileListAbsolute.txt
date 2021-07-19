@@ -34,3 +34,4 @@ C:\Users\sini\Desktop\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.dll
 C:\Users\sini\Desktop\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\ref\DirInfo.dll
 C:\Users\sini\Desktop\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.pdb
 C:\Users\sini\Desktop\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.genruntimeconfig.cache
+C:\Users\sini\Desktop\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.Resources.resources

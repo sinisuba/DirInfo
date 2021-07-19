@@ -2,16 +2,17 @@
 
 Public Class Form1
     Private Sub ButtonIspis_Click(sender As Object, e As EventArgs) Handles ButtonIspis.Click
+        ' Allow the user to browse directories via ListBox selection
+        If ListBoxFolderi.SelectedIndex >= 0 Then ' An item is selected in ListBoxFolderi
+            TextBoxPath.Text = ListBoxFolderi.SelectedItem
+        End If
+
+        Dim path As String = TextBoxPath.Text
+
         ListBoxFolderi.Items.Clear()
         ListBoxFajlovi.Items.Clear()
 
         LabelDriveInfo.Visible = True
-
-        If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
-            TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
-        End If
-
-        Dim path As String = TextBoxPath.Text
 
         If Directory.Exists(path) Then
             LabelDriveInfo.Text = "Pronadjen directory path '" & path & "'"
@@ -19,10 +20,14 @@ Public Class Form1
             ButtonNewDir.Enabled = True
             ButtonDelDir.Enabled = True
 
+            If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
+                TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
+            End If
+
             Dim folderi As String() = Directory.GetDirectories(path)
             Dim fajlovi As String() = Directory.GetFiles(path)
 
-            For Each folder As String In folderi
+            For Each folder In folderi
                 Try
                     If (File.GetAttributes(folder).HasFlag(FileAttributes.Hidden)) Then
                         ListBoxFolderi.Items.Add("[Hidden] " & folder)
@@ -35,7 +40,7 @@ Public Class Form1
                 End Try
             Next
 
-            For Each fajl As String In fajlovi
+            For Each fajl In fajlovi
                 Try
                     If (File.GetAttributes(fajl).HasFlag(FileAttributes.Hidden)) Then
                         ListBoxFajlovi.Items.Add("[Hidden] " & fajl)
@@ -92,4 +97,5 @@ Public Class Form1
             End Try
         End If
     End Sub
+
 End Class
