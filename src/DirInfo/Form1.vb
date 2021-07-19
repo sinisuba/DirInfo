@@ -7,6 +7,10 @@ Public Class Form1
             TextBoxPath.Text = ListBoxFolderi.SelectedItem
         End If
 
+        If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
+            TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
+        End If
+
         Dim path As String = TextBoxPath.Text
 
         ListBoxFolderi.Items.Clear()
@@ -19,10 +23,6 @@ Public Class Form1
 
             ButtonNewDir.Enabled = True
             ButtonDelDir.Enabled = True
-
-            If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
-                TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
-            End If
 
             Dim folderi As String() = Directory.GetDirectories(path)
             Dim fajlovi As String() = Directory.GetFiles(path)
