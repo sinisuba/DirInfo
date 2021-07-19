@@ -7,10 +7,6 @@ Public Class Form1
             TextBoxPath.Text = ListBoxFolderi.SelectedItem
         End If
 
-        If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
-            TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
-        End If
-
         Dim path As String = TextBoxPath.Text
 
         ListBoxFolderi.Items.Clear()
@@ -19,7 +15,11 @@ Public Class Form1
         LabelDriveInfo.Visible = True
 
         If Directory.Exists(path) Then
-            LabelDriveInfo.Text = "Pronadjen directory path '" & path & "'"
+            If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
+                TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
+            End If
+
+            LabelDriveInfo.Text = "Pronadjen directory path '" & TextBoxPath.Text & "'"
 
             ButtonNewDir.Enabled = True
             ButtonDelDir.Enabled = True
@@ -53,7 +53,7 @@ Public Class Form1
                 End Try
             Next
         Else
-            LabelDriveInfo.Text = "Navedeni directory path " & "'" & path & "' " & "ne postoji!"
+            LabelDriveInfo.Text = "Navedeni directory path " & "'" & TextBoxPath.Text & "' " & "ne postoji!"
 
             ButtonNewDir.Enabled = False
             ButtonDelDir.Enabled = False
