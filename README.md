@@ -32,3 +32,7 @@ Other exceptions include `IOException`, `ArgumentException`, `ArgumentNullExcept
 ![new-dir-creation](../main/NewDir.png?raw=true)
 
 ![after-new-dir](../main/After_NewDir.png?raw=true)
+
+ # Users can also specify the directory via ListBox selection
+
+![directory-selection](../main/DirectorySelection.png?raw=true)
