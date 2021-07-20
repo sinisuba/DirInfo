@@ -4,7 +4,15 @@ Public Class Form1
     Private Sub ButtonIspis_Click(sender As Object, e As EventArgs) Handles ButtonIspis.Click
         ' Allow the user to browse directories via ListBox selection
         If ListBoxFolderi.SelectedIndex >= 0 Then ' An item is selected in ListBoxFolderi
-            TextBoxPath.Text = ListBoxFolderi.SelectedItem
+            If ListBoxFolderi.SelectedItem.Length >= 8 Then ' Substring throws exception if unhandled
+                If ListBoxFolderi.SelectedItem.Substring(0, 8) = "[Hidden]" Then
+                    MessageBox.Show("Nije dozvoljen prikaz skrivenih direktorijuma!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    TextBoxPath.Text = ListBoxFolderi.SelectedItem
+                End If
+            Else
+                TextBoxPath.Text = ListBoxFolderi.SelectedItem
+            End If
         End If
 
         Dim path As String = TextBoxPath.Text
