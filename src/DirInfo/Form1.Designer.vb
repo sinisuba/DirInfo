@@ -32,14 +32,16 @@ Partial Class Form1
         Me.ButtonIspis = New System.Windows.Forms.Button()
         Me.ListBoxFolderi = New System.Windows.Forms.ListBox()
         Me.ButtonDelDir = New System.Windows.Forms.Button()
+        Me.ButtonDirSearch = New System.Windows.Forms.Button()
+        Me.ButtonFileSearch = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ButtonNewDir
         '
         Me.ButtonNewDir.Enabled = False
-        Me.ButtonNewDir.Location = New System.Drawing.Point(65, 438)
+        Me.ButtonNewDir.Location = New System.Drawing.Point(21, 438)
         Me.ButtonNewDir.Name = "ButtonNewDir"
-        Me.ButtonNewDir.Size = New System.Drawing.Size(113, 37)
+        Me.ButtonNewDir.Size = New System.Drawing.Size(157, 37)
         Me.ButtonNewDir.TabIndex = 17
         Me.ButtonNewDir.Text = "Novi direktorijum"
         Me.ButtonNewDir.UseVisualStyleBackColor = True
@@ -122,16 +124,38 @@ Partial Class Form1
         Me.ButtonDelDir.Enabled = False
         Me.ButtonDelDir.Location = New System.Drawing.Point(215, 438)
         Me.ButtonDelDir.Name = "ButtonDelDir"
-        Me.ButtonDelDir.Size = New System.Drawing.Size(113, 37)
+        Me.ButtonDelDir.Size = New System.Drawing.Size(157, 37)
         Me.ButtonDelDir.TabIndex = 18
         Me.ButtonDelDir.Text = "Brisi direktorijum"
         Me.ButtonDelDir.UseVisualStyleBackColor = True
+        '
+        'ButtonDirSearch
+        '
+        Me.ButtonDirSearch.Enabled = False
+        Me.ButtonDirSearch.Location = New System.Drawing.Point(21, 488)
+        Me.ButtonDirSearch.Name = "ButtonDirSearch"
+        Me.ButtonDirSearch.Size = New System.Drawing.Size(157, 37)
+        Me.ButtonDirSearch.TabIndex = 19
+        Me.ButtonDirSearch.Text = "Pretraga direktorijuma"
+        Me.ButtonDirSearch.UseVisualStyleBackColor = True
+        '
+        'ButtonFileSearch
+        '
+        Me.ButtonFileSearch.Enabled = False
+        Me.ButtonFileSearch.Location = New System.Drawing.Point(215, 488)
+        Me.ButtonFileSearch.Name = "ButtonFileSearch"
+        Me.ButtonFileSearch.Size = New System.Drawing.Size(157, 37)
+        Me.ButtonFileSearch.TabIndex = 20
+        Me.ButtonFileSearch.Text = "Pretraga fajlova"
+        Me.ButtonFileSearch.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(401, 504)
+        Me.ClientSize = New System.Drawing.Size(401, 546)
+        Me.Controls.Add(Me.ButtonFileSearch)
+        Me.Controls.Add(Me.ButtonDirSearch)
         Me.Controls.Add(Me.ButtonDelDir)
         Me.Controls.Add(Me.ButtonNewDir)
         Me.Controls.Add(Me.TextBoxPath)
@@ -159,4 +183,6 @@ Partial Class Form1
     Friend WithEvents ButtonIspis As Button
     Friend WithEvents ListBoxFolderi As ListBox
     Friend WithEvents ButtonDelDir As Button
+    Friend WithEvents ButtonDirSearch As Button
+    Friend WithEvents ButtonFileSearch As Button
 End Class

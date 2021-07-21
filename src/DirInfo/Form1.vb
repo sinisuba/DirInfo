@@ -24,13 +24,15 @@ Public Class Form1
 
         If Directory.Exists(path) Then
             If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
-                TextBoxPath.Text &= "/" ' Handles path ending, should be '/' or '\'
+                TextBoxPath.Text &= "\" ' Handles path ending; avoids issues with directory creation
             End If
 
             LabelDriveInfo.Text = "Pronadjen directory path '" & TextBoxPath.Text & "'"
 
             ButtonNewDir.Enabled = True
             ButtonDelDir.Enabled = True
+            ButtonDirSearch.Enabled = True
+            ButtonFileSearch.Enabled = True
 
             Dim folderi As String() = Directory.GetDirectories(path)
             Dim fajlovi As String() = Directory.GetFiles(path)
@@ -65,6 +67,8 @@ Public Class Form1
 
             ButtonNewDir.Enabled = False
             ButtonDelDir.Enabled = False
+            ButtonDirSearch.Enabled = False
+            ButtonFileSearch.Enabled = False
         End If
     End Sub
 
@@ -106,4 +110,53 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub ButtonDirSearch_Click(sender As Object, e As EventArgs) Handles ButtonDirSearch.Click
+        Dim dir As String = InputBox("* Pretrazivanje skrivenih direktorijuma nije dozvoljeno", "Unesite naziv direktorijuma")
+
+        If String.IsNullOrWhiteSpace(dir) Then
+            MessageBox.Show("Unesite pravilan naziv!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            Dim dirSearch As String = TextBoxPath.Text & dir
+            Dim found As Boolean = False
+
+            For i = 0 To ListBoxFolderi.Items.Count - 1
+                If ListBoxFolderi.Items(i).ToString.ToLower = dirSearch.ToLower() Then ' Ignore case
+                    found = True
+                    Exit For
+                End If
+            Next
+
+            If found Then
+                MessageBox.Show("Pronadjen direktorijum '" & dirSearch & "'", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                TextBoxPath.Text = dirSearch
+                ButtonIspis.PerformClick()
+            Else
+                MessageBox.Show("Direktorijum '" & dirSearch & "' ne postoji!", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        End If
+    End Sub
+
+    Private Sub ButtonFileSearch_Click(sender As Object, e As EventArgs) Handles ButtonFileSearch.Click
+        Dim file As String = InputBox("* Pretrazivanje skrivenih fajlova nije dozvoljeno", "Unesite naziv fajla")
+
+        If String.IsNullOrWhiteSpace(file) Then
+            MessageBox.Show("Unesite pravilan naziv sa ekstenzijom!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            Dim fileSearch As String = TextBoxPath.Text & file
+            Dim found As Boolean = False
+
+            For i = 0 To ListBoxFajlovi.Items.Count - 1
+                If ListBoxFajlovi.Items(i).ToString.ToLower = fileSearch.ToLower() Then ' Ignore case
+                    found = True
+                    Exit For
+                End If
+            Next
+
+            If found Then
+                MessageBox.Show("Pronadjen fajl '" & fileSearch & "'", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("Fajl '" & fileSearch & "' ne postoji!", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        End If
+    End Sub
 End Class

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sini\\Desktop\\DirInfo\\src\\DirInfo\\DirInfo.vbproj": {}
+    "C:\\Users\\sini\\Desktop\\src\\DirInfo\\DirInfo.vbproj": {}
   },
   "projects": {
-    "C:\\Users\\sini\\Desktop\\DirInfo\\src\\DirInfo\\DirInfo.vbproj": {
+    "C:\\Users\\sini\\Desktop\\src\\DirInfo\\DirInfo.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sini\\Desktop\\DirInfo\\src\\DirInfo\\DirInfo.vbproj",
+        "projectUniqueName": "C:\\Users\\sini\\Desktop\\src\\DirInfo\\DirInfo.vbproj",
         "projectName": "DirInfo",
-        "projectPath": "C:\\Users\\sini\\Desktop\\DirInfo\\src\\DirInfo\\DirInfo.vbproj",
+        "projectPath": "C:\\Users\\sini\\Desktop\\src\\DirInfo\\DirInfo.vbproj",
         "packagesPath": "C:\\Users\\sini\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sini\\Desktop\\DirInfo\\src\\DirInfo\\obj\\",
+        "outputPath": "C:\\Users\\sini\\Desktop\\src\\DirInfo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sini\\AppData\\Roaming\\NuGet\\NuGet.Config",
