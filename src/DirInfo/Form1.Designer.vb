@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ButtonNewDir = New System.Windows.Forms.Button()
         Me.TextBoxPath = New System.Windows.Forms.TextBox()
         Me.LabelDirPath = New System.Windows.Forms.Label()
@@ -34,6 +35,8 @@ Partial Class Form1
         Me.ButtonDelDir = New System.Windows.Forms.Button()
         Me.ButtonDirSearch = New System.Windows.Forms.Button()
         Me.ButtonFileSearch = New System.Windows.Forms.Button()
+        Me.ButtonReturn = New System.Windows.Forms.Button()
+        Me.ToolTipReturn = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'ButtonNewDir
@@ -149,11 +152,22 @@ Partial Class Form1
         Me.ButtonFileSearch.Text = "Pretraga fajlova"
         Me.ButtonFileSearch.UseVisualStyleBackColor = True
         '
+        'ButtonReturn
+        '
+        Me.ButtonReturn.Enabled = False
+        Me.ButtonReturn.Location = New System.Drawing.Point(21, 169)
+        Me.ButtonReturn.Name = "ButtonReturn"
+        Me.ButtonReturn.Size = New System.Drawing.Size(26, 25)
+        Me.ButtonReturn.TabIndex = 21
+        Me.ButtonReturn.Text = "↩️"
+        Me.ButtonReturn.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(401, 546)
+        Me.Controls.Add(Me.ButtonReturn)
         Me.Controls.Add(Me.ButtonFileSearch)
         Me.Controls.Add(Me.ButtonDirSearch)
         Me.Controls.Add(Me.ButtonDelDir)
@@ -185,4 +199,6 @@ Partial Class Form1
     Friend WithEvents ButtonDelDir As Button
     Friend WithEvents ButtonDirSearch As Button
     Friend WithEvents ButtonFileSearch As Button
+    Friend WithEvents ButtonReturn As Button
+    Friend WithEvents ToolTipReturn As ToolTip
 End Class
