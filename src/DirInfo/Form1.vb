@@ -6,7 +6,7 @@ Public Class Form1
     Private Sub printDirs(ByRef folderi() As String)
         For Each folder In folderi
             Try
-                If (File.GetAttributes(folder).HasFlag(FileAttributes.Hidden)) Then
+                If File.GetAttributes(folder).HasFlag(FileAttributes.Hidden) Then
                     ListBoxFolderi.Items.Add("[Hidden] " & folder)
                 Else
                     ListBoxFolderi.Items.Add(folder)
@@ -20,7 +20,7 @@ Public Class Form1
     Private Sub printFiles(ByRef fajlovi() As String)
         For Each fajl In fajlovi
             Try
-                If (File.GetAttributes(fajl).HasFlag(FileAttributes.Hidden)) Then
+                If File.GetAttributes(fajl).HasFlag(FileAttributes.Hidden) Then
                     ListBoxFajlovi.Items.Add("[Hidden] " & fajl)
                 Else
                     ListBoxFajlovi.Items.Add(fajl)
@@ -36,8 +36,8 @@ Public Class Form1
 
         ' Allow the user to browse directories via ListBox selection
         If ListBoxFolderi.SelectedIndex >= 0 Then ' An item is selected in ListBoxFolderi
-            If ListBoxFolderi.SelectedItem.Length >= 9 Then ' Substring throws exception if unhandled
-                If ListBoxFolderi.SelectedItem.Substring(0, 9) = "[Hidden] " Then
+            If ListBoxFolderi.SelectedItem.Length >= 8 Then ' Substring throws exception if unhandled
+                If ListBoxFolderi.SelectedItem.Substring(0, 8) = "[Hidden]" Then
                     MessageBox.Show("Nije dozvoljen prikaz skrivenih direktorijuma!", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     hidden_attempt = True
                 Else
@@ -66,6 +66,10 @@ Public Class Form1
                 prev_paths(index) = TextBoxPath.Text
             End If
 
+            ' Catch possible ex: 'System.UnauthorizedAccessException'
+            Dim folderi() As String = Directory.GetDirectories(path)
+            Dim fajlovi() As String = Directory.GetFiles(path)
+
             LabelDriveInfo.Text = "Pronadjen directory path '" & TextBoxPath.Text & "'"
 
             ButtonNewDir.Enabled = True
@@ -73,9 +77,6 @@ Public Class Form1
             ButtonReturn.Enabled = True
             ButtonDirSearch.Enabled = True
             ButtonFileSearch.Enabled = True
-
-            Dim folderi As String() = Directory.GetDirectories(path)
-            Dim fajlovi As String() = Directory.GetFiles(path)
 
             printDirs(folderi)
             printFiles(fajlovi)
@@ -89,7 +90,21 @@ Public Class Form1
             ButtonFileSearch.Enabled = False
         End If
     End Sub
+    Private Sub dirDoubleClick(sender As Object, e As EventArgs) Handles ListBoxFolderi.DoubleClick
+        Dim dirSelected As String = ListBoxFolderi.SelectedItem
 
+        If dirSelected.Length >= 8 Then
+            If dirSelected.Substring(0, 8) = "[Hidden]" Then
+                MessageBox.Show("Nije dozvoljen prikaz skrivenih direktorijuma!", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                TextBoxPath.Text = dirSelected
+                ButtonIspis.PerformClick()
+            End If
+        Else
+            TextBoxPath.Text = dirSelected
+            ButtonIspis.PerformClick()
+        End If
+    End Sub
     Private Sub ButtonNewDir_Click(sender As Object, e As EventArgs) Handles ButtonNewDir.Click
         Dim dirName As String = InputBox("Unesite naziv novog direktorijuma", "New Dir")
 
