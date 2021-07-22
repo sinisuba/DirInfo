@@ -35,5 +35,6 @@ Other exceptions include `IOException`, `ArgumentException`, `ArgumentNullExcept
 ![after-new-dir](../main/After_NewDir.png?raw=true)
 
  # Users can also specify the directory via ListBox selection
+Users can double-click the directory they intend to browse.
 
 ![directory-selection](../main/DirectorySelection.png?raw=true)
