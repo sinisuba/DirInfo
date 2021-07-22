@@ -3,7 +3,7 @@
 Public Class Form1
     Dim prev_paths(0) As String
     Dim index As Integer = -1
-    Private Sub printDirs(ByVal folderi() As String)
+    Private Sub printDirs(ByRef folderi() As String)
         For Each folder In folderi
             Try
                 If (File.GetAttributes(folder).HasFlag(FileAttributes.Hidden)) Then
@@ -17,7 +17,7 @@ Public Class Form1
             End Try
         Next
     End Sub
-    Private Sub printFiles(ByVal fajlovi() As String)
+    Private Sub printFiles(ByRef fajlovi() As String)
         For Each fajl In fajlovi
             Try
                 If (File.GetAttributes(fajl).HasFlag(FileAttributes.Hidden)) Then
