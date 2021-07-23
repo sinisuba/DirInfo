@@ -40,10 +40,9 @@ Public Class Form1
                 If ListBoxFolderi.SelectedItem.Substring(0, 8) = "[Hidden]" Then
                     MessageBox.Show("Nije dozvoljen prikaz skrivenih direktorijuma!", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     hidden_attempt = True
-                Else
-                    TextBoxPath.Text = ListBoxFolderi.SelectedItem
                 End If
-            Else
+            End If
+            If Not hidden_attempt Then
                 TextBoxPath.Text = ListBoxFolderi.SelectedItem
             End If
         End If
@@ -80,7 +79,11 @@ Public Class Form1
             printDirs(folderi)
             printFiles(fajlovi)
         Else
-            LabelDriveInfo.Text = "Navedeni directory path " & "'" & TextBoxPath.Text & "' " & "ne postoji!"
+            If String.IsNullOrWhiteSpace(TextBoxPath.Text) Then
+                LabelDriveInfo.Text = "Unesite directory path!"
+            Else
+                LabelDriveInfo.Text = "Navedeni directory path " & "'" & TextBoxPath.Text & "' " & "ne postoji!"
+            End If
 
             ButtonNewDir.Enabled = False
             ButtonDelDir.Enabled = False
@@ -92,16 +95,18 @@ Public Class Form1
     Private Sub dirDoubleClick(sender As Object, e As EventArgs) Handles ListBoxFolderi.DoubleClick
         Dim dirSelected As String = ListBoxFolderi.SelectedItem
 
-        If dirSelected.Length >= 8 Then
-            If dirSelected.Substring(0, 8) = "[Hidden]" Then
-                MessageBox.Show("Nije dozvoljen prikaz skrivenih direktorijuma!", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        If Not String.IsNullOrWhiteSpace(dirSelected) Then ' Users can double-click empty space ('Nothing') and throw an exception if unhandled
+            If dirSelected.Length >= 8 Then
+                If dirSelected.Substring(0, 8) = "[Hidden]" Then
+                    MessageBox.Show("Nije dozvoljen prikaz skrivenih direktorijuma!", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    TextBoxPath.Text = dirSelected
+                    ButtonIspis.PerformClick()
+                End If
             Else
                 TextBoxPath.Text = dirSelected
                 ButtonIspis.PerformClick()
             End If
-        Else
-            TextBoxPath.Text = dirSelected
-            ButtonIspis.PerformClick()
         End If
     End Sub
     Private Sub ButtonNewDir_Click(sender As Object, e As EventArgs) Handles ButtonNewDir.Click
@@ -191,9 +196,6 @@ Public Class Form1
             End If
         End If
     End Sub
-    Private Sub ButtonReturn_MouseHover(sender As Object, e As EventArgs) Handles ButtonReturn.MouseHover
-        ToolTipReturn.SetToolTip(ButtonReturn, "Return to previous directory")
-    End Sub
     Private Sub ButtonReturn_Click(sender As Object, e As EventArgs) Handles ButtonReturn.Click
         index -= 1
 
@@ -213,5 +215,15 @@ Public Class Form1
             ButtonReturn.Enabled = False ' No previous directories
             index += 1 ' Handles the -1 index/beginning of path return issue
         End If
+    End Sub
+    Private Sub ButtonIspis_MouseHover(sender As Object, e As EventArgs) Handles ButtonIspis.MouseHover
+        ToolTipReturn.SetToolTip(ButtonIspis, "Ispis sadrzaja trenutnog direktorijuma")
+    End Sub
+    Private Sub ButtonReturn_MouseHover(sender As Object, e As EventArgs) Handles ButtonReturn.MouseHover
+        ToolTipReturn.SetToolTip(ButtonReturn, "Nazad")
+    End Sub
+    Private Sub ButtonNewDir_MouseHover(sender As Object, e As EventArgs) Handles ButtonNewDir.MouseHover
+        ' No need to check for valid TextBoxPath, already handled in ButtonIspis_Click
+        ToolTipReturn.SetToolTip(ButtonNewDir, "Direktorijum ce biti kreiran u: '" & TextBoxPath.Text & "'")
     End Sub
 End Class
