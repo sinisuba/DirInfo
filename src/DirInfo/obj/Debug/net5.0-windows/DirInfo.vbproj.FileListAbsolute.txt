@@ -54,3 +54,22 @@ C:\Users\sini\Desktop\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.dll
 C:\Users\sini\Desktop\src\DirInfo\obj\Debug\net5.0-windows\ref\DirInfo.dll
 C:\Users\sini\Desktop\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.pdb
 C:\Users\sini\Desktop\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.genruntimeconfig.cache
+D:\GitHub repos\DirInfo\src\DirInfo\bin\Debug\net5.0-windows\DirInfo.exe
+D:\GitHub repos\DirInfo\src\DirInfo\bin\Debug\net5.0-windows\DirInfo.deps.json
+D:\GitHub repos\DirInfo\src\DirInfo\bin\Debug\net5.0-windows\DirInfo.runtimeconfig.json
+D:\GitHub repos\DirInfo\src\DirInfo\bin\Debug\net5.0-windows\DirInfo.runtimeconfig.dev.json
+D:\GitHub repos\DirInfo\src\DirInfo\bin\Debug\net5.0-windows\DirInfo.dll
+D:\GitHub repos\DirInfo\src\DirInfo\bin\Debug\net5.0-windows\ref\DirInfo.dll
+D:\GitHub repos\DirInfo\src\DirInfo\bin\Debug\net5.0-windows\DirInfo.pdb
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.vbproj.AssemblyReference.cache
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.Form1.resources
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.Resources.resources
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.vbproj.GenerateResource.cache
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.AssemblyInfoInputs.cache
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.AssemblyInfo.vb
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.vbproj.CoreCompileInputs.cache
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.dll
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\ref\DirInfo.dll
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.pdb
+D:\GitHub repos\DirInfo\src\DirInfo\obj\Debug\net5.0-windows\DirInfo.genruntimeconfig.cache

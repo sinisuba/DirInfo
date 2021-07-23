@@ -66,7 +66,6 @@ Public Class Form1
                 prev_paths(index) = TextBoxPath.Text
             End If
 
-            ' Catch possible ex: 'System.UnauthorizedAccessException'
             Dim folderi() As String = Directory.GetDirectories(path)
             Dim fajlovi() As String = Directory.GetFiles(path)
 
