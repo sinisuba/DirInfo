@@ -54,9 +54,16 @@ Public Class Form1
         ListBoxFolderi.Items.Clear()
         ListBoxFajlovi.Items.Clear()
 
-        LabelDriveInfo.Visible = True
-
         If Directory.Exists(path) Then
+            Try
+                Directory.GetDirectories(path)
+            Catch noAuth As System.UnauthorizedAccessException ' Attempting to access certain directories can throw an UnauthorizedAccessException
+                MessageBox.Show(noAuth.Message, "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End Try
+
+            LabelDriveInfo.Visible = True
+
             If (TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "/" And TextBoxPath.Text(TextBoxPath.Text.Length - 1) <> "\") Then
                 TextBoxPath.Text &= "\" ' Handles path ending; avoids issues with directory creation
             End If
@@ -149,7 +156,8 @@ Public Class Form1
             End If
 
             info &= Environment.NewLine
-            info &= "Vrijeme kreiranja fajla: " & fileInfo.CreationTime & Environment.NewLine
+            info &= "Vrijeme kreiranja fajla: " & fileInfo.CreationTime
+            info &= Environment.NewLine
             info &= "Vrijeme zadnjeg pristupa: " & fileInfo.LastAccessTime
 
             MessageBox.Show(info, "Informacije o fajlu: '" & Strings.StrReverse(fileName) & "'", MessageBoxButtons.OK, MessageBoxIcon.Information)
