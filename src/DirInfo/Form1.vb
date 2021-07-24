@@ -1,5 +1,7 @@
 ﻿Imports System.IO ' System.IO.Directory, System.IO.File
 
+#Disable Warning IDE1006 ' Disable Naming Styles Warning in VS
+
 Public Class Form1
     Dim prev_paths(0) As String
     Dim index As Integer = -1
@@ -92,7 +94,7 @@ Public Class Form1
             ButtonFileSearch.Enabled = False
         End If
     End Sub
-    Private Sub dirDoubleClick(sender As Object, e As EventArgs) Handles ListBoxFolderi.DoubleClick
+    Private Sub dirDblClick(sender As Object, e As EventArgs) Handles ListBoxFolderi.DoubleClick
         Dim dirSelected As String = ListBoxFolderi.SelectedItem
 
         If Not String.IsNullOrWhiteSpace(dirSelected) Then ' Users can double-click empty space ('Nothing') and throw an exception if unhandled
@@ -107,6 +109,50 @@ Public Class Form1
                 TextBoxPath.Text = dirSelected
                 ButtonIspis.PerformClick()
             End If
+        End If
+    End Sub
+    Private Sub fileDblClick(sender As Object, e As EventArgs) Handles ListBoxFajlovi.MouseDoubleClick
+        Dim showInfo As Boolean = True
+
+        Dim fileSelected As String = ListBoxFajlovi.SelectedItem
+
+        If Not String.IsNullOrWhiteSpace(fileSelected) Then
+            If fileSelected.Length >= 8 Then
+                If fileSelected.Substring(0, 8) = "[Hidden]" Then
+                    MessageBox.Show("Nije dozvoljen prikaz informacija o skrivenim fajlovima!", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    showInfo = False
+                End If
+            End If
+        Else
+            showInfo = False
+        End If
+
+        If showInfo Then
+            Dim fileName As String = ""
+
+            Dim i As Integer = fileSelected.Length - 1
+
+            While fileSelected(i) <> "\" And fileSelected(i) <> "/"
+                fileName &= fileSelected(i)
+                i -= 1
+            End While
+
+            Dim fileInfo As New IO.FileInfo(fileSelected)
+
+            Dim info As String = ""
+
+            Dim isReadOnly As Boolean = fileInfo.IsReadOnly
+            If isReadOnly Then
+                info &= "Fajl je read-only."
+            Else
+                info &= "Fajl nije read-only."
+            End If
+
+            info &= Environment.NewLine
+            info &= "Vrijeme kreiranja fajla: " & fileInfo.CreationTime & Environment.NewLine
+            info &= "Vrijeme zadnjeg pristupa: " & fileInfo.LastAccessTime
+
+            MessageBox.Show(info, "Informacije o fajlu: '" & Strings.StrReverse(fileName) & "'", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
     Private Sub ButtonNewDir_Click(sender As Object, e As EventArgs) Handles ButtonNewDir.Click
