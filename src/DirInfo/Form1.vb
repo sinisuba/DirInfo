@@ -7,6 +7,8 @@ Public Class Form1
     Dim index As Integer = -1
     Dim index_incremented As Boolean = False
     Dim dir_changed As Boolean = True
+    Dim prev_TextBoxPath As String
+
     Private Sub printDirs(ByRef folderi() As String)
         For Each folder In folderi
             Try
@@ -21,6 +23,7 @@ Public Class Form1
             End Try
         Next
     End Sub
+
     Private Sub printFiles(ByRef fajlovi() As String)
         For Each fajl In fajlovi
             Try
@@ -35,6 +38,7 @@ Public Class Form1
             End Try
         Next
     End Sub
+
     Private Sub ButtonIspis_Click(sender As Object, e As EventArgs) Handles ButtonIspis.Click
         Dim hidden_attempt As Boolean = False
 
@@ -75,11 +79,13 @@ Public Class Form1
 
             TextBoxPathInfo.Text = "Pronadjen directory path '" & TextBoxPath.Text & "'"
 
-            If index >= 0 Then
-                If TextBoxPath.Text = prev_paths(index) Then
-                    dir_changed = False
-                End If
+            If TextBoxPath.Text = prev_TextBoxPath Then
+                dir_changed = False
+            Else
+                dir_changed = True
             End If
+
+            prev_TextBoxPath = TextBoxPath.Text
 
             If hidden_attempt = False And dir_changed = True Then ' Avoid index increment if a hidden directory is selected, or if user is attempting to load the same dir
                 index += 1
@@ -115,6 +121,30 @@ Public Class Form1
             ButtonFileSearch.Enabled = False
         End If
     End Sub
+    Private Sub ButtonReturn_Click(sender As Object, e As EventArgs) Handles ButtonReturn.Click
+        index -= 1
+
+        If index >= 0 Then
+            Dim folderi As String() = Directory.GetDirectories(prev_paths(index))
+            Dim fajlovi As String() = Directory.GetFiles(prev_paths(index))
+
+            TextBoxPath.Text = prev_paths(index)
+            TextBoxPathInfo.Text = "Pronadjen directory path '" & TextBoxPath.Text & "'"
+
+            ListBoxFolderi.Items.Clear()
+            ListBoxFajlovi.Items.Clear()
+
+            ButtonIspis.PerformClick() ' If the user navigates to an existing directory from an unknown one, enables buttons; Increments index
+            index -= 1
+
+            printDirs(folderi)
+            printFiles(fajlovi)
+        Else
+            ButtonReturn.Enabled = False ' No previous directories
+            index += 1 ' Handles the -1 index/beginning of path return issue
+        End If
+    End Sub
+
     Private Sub dirDblClick(sender As Object, e As EventArgs) Handles ListBoxFolderi.DoubleClick
         Dim dirSelected As String = ListBoxFolderi.SelectedItem
 
@@ -132,6 +162,7 @@ Public Class Form1
             End If
         End If
     End Sub
+
     Private Sub fileDblClick(sender As Object, e As EventArgs) Handles ListBoxFajlovi.MouseDoubleClick
         Dim showInfo As Boolean = True
 
@@ -177,6 +208,7 @@ Public Class Form1
             MessageBox.Show(info, "Informacije o fajlu: '" & Strings.StrReverse(fileName) & "'", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
     Private Sub ButtonNewDir_Click(sender As Object, e As EventArgs) Handles ButtonNewDir.Click
         Dim dirName As String = InputBox("Unesite naziv novog direktorijuma", "New Dir")
 
@@ -264,37 +296,17 @@ Public Class Form1
             End If
         End If
     End Sub
-    Private Sub ButtonReturn_Click(sender As Object, e As EventArgs) Handles ButtonReturn.Click
-        index -= 1
 
-        If index >= 0 Then
-            Dim folderi As String() = Directory.GetDirectories(prev_paths(index))
-            Dim fajlovi As String() = Directory.GetFiles(prev_paths(index))
-
-            TextBoxPath.Text = prev_paths(index)
-            TextBoxPathInfo.Text = "Pronadjen directory path '" & TextBoxPath.Text & "'"
-
-            ListBoxFolderi.Items.Clear()
-            ListBoxFajlovi.Items.Clear()
-
-            ButtonIspis.PerformClick() ' If the user navigates to an existing directory from an unknown one, enables buttons; Increments index
-            index -= 1
-
-            printDirs(folderi)
-            printFiles(fajlovi)
-        Else
-            ButtonReturn.Enabled = False ' No previous directories
-            index += 1 ' Handles the -1 index/beginning of path return issue
-        End If
-    End Sub
     Private Sub ButtonIspis_MouseHover(sender As Object, e As EventArgs) Handles ButtonIspis.MouseHover
         ToolTipIspis.SetToolTip(ButtonIspis, "Ispis sadrzaja trenutnog direktorijuma")
     End Sub
     Private Sub ButtonReturn_MouseHover(sender As Object, e As EventArgs) Handles ButtonReturn.MouseHover
         ToolTipReturn.SetToolTip(ButtonReturn, "Nazad")
     End Sub
+
     Private Sub ButtonNewDir_MouseHover(sender As Object, e As EventArgs) Handles ButtonNewDir.MouseHover
         ' No need to check for valid TextBoxPath, already handled in ButtonIspis_Click
         ToolTipNewDir.SetToolTip(ButtonNewDir, "Direktorijum ce biti kreiran u: '" & TextBoxPath.Text & "'")
     End Sub
+
 End Class
